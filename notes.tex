@@ -1,0 +1,170 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amssymb,amsmath,amsthm,indentfirst}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{color}
+
+% general definitions
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\reals}{\mathbb{R}}
+
+\title{Research Notes}
+\author{Ryan Caulfield}
+\date{}
+\begin{document}
+
+\maketitle
+\newpage
+
+\maketitle
+\tableofcontents
+
+\newpage
+\section{T-Matrix and Scattering}
+\section{Local vs. Non-Local potentials}
+
+\newpage
+\appendix
+
+\section{Interpolation}
+To be able to do Calculus, we must be able to represent a function numerically. We can of course define a function by a rule, but this is not useful when we are trying to represent a function that we do not know explicitly. Often, we only know that a function satisfies some differential equation or recurrence relation, and evaluating it at a point may be difficult. To solve this, we represent a function by sampling the function at a finite number of points. We can then evaluate the function at other points using interpolation.
+
+\subsection{Global Interpolation by Polynomials}
+First, we can sample the function at a sequence of points, and approximate it by the unique polynomial which agrees with the function at each points. Let's consider a function $f(x) : [a,b] \rightarrow \reals$ Let $x_i$ be a sequence of points in $[a,b]$ such that $x_0 = a$ and $x_N = b$. Now, we can approximate $f(x)$ by the unique polynomial which agrees with $f(x)$ at each point $x_i$. To find such a polynomial, we need to find coefficients $a_j$ such that for each $i$,
+\begin{center}
+$a_0 + a_1 x_i + a_2 x_i^2 + ... + a_N x_i^N = f(x_i)$
+\end{center}
+
+\indent We can convert this to a matrix equation $\boldsymbol{X}\overrightarrow{a} = \overrightarrow{f}$, where $a$ is the vector of coefficients, $f$ is the vector of function values such that $f_i = f(x_i)$, and $X_{ij} = x_i^j$ Now, we can find the coefficients easily by solving the matrix equation. The solution is given by 
+\begin{center}
+$\overrightarrow{a} = \boldsymbol{X}^{-1} \overrightarrow{f}$
+\end{center}
+With the coefficients, we can evaluate $f(x)$ at any $x \in [a,b]$ by
+\begin{center}
+$f(x) = \sum_{i=0}^{N} a_i x^i$ 
+\end{center}
+
+\indent As constructed, this method of interpolation should approximate an Nth degree polynomial exactly. But, how accurately does it approximate non-polynomial functions? The Stone-Weierstrass theorem tells us that every continuous function can be uniformly approximated as a polynomial. One would assume that as the number of sample points increases, the method should converge uniformly to the function. It turns out that this is not true in general. In particular, choosing $x_i$ to be evenly spaced and a function whose Taylor series has a finite radius of convergence this method fails spectacularly.
+\begin{center}
+\textcolor{red}{Add a plot here showing runge phenomena and a short description}
+\end{center}
+
+\indent We can mitigate this problem by using points which have an asymptotic distribution in $[0,1]$ given by
+\begin{center}
+$\rho(x) = \frac{N}{\pi \sqrt{1 - x^2}}$
+\end{center}
+
+\indent Often, we satisfy this condition using roots or extrema of certain sets of orthogonal polynomials such as Legendre or Chebyshev polynomials. These special polynomials turn out to be very useful for quadrature and derivatives, and they will be explained further in later sections.
+
+\begin{center}
+\textcolor{red}{Add a plot here showing the same function used previously but interpolated with Chebyshev nodes and a short description}
+\end{center}
+
+\subsection{Piecewise Interpolation and Splines}
+\begin{center}
+\textcolor{red}{Add stuff about stuff.}
+\end{center}
+
+\newpage
+\section{Integration}
+We now want to calculate definite integrals of functions represented numerically. One way of doing this, is to decide on an interpolation scheme, and integrate the interpolant exactly. This can often be done easily when using a polynomial interpolant. What we would like is a rule as follows.
+
+\begin{center}
+$\int_{a}^{b}f(x) = \sum_{i=0}^{N-1}f(x_i)w_i$
+\end{center}
+
+The challenge is finding the right values of $w_i$.
+
+\subsection{Newton-Cotes Formula}
+The simplest method for integration is to use piecewise linear interpolation, since each region $[x_i,x_{i+1}]$ can be integrated exactly using the geometric formula for a trapezoid. The method is appropriately named the trapezoid rule.
+
+\begin{center}
+$\int_{a}^{b}f(x) = \frac{f(x_0)+f(x_1)}{2}h + \frac{f(x_1)+f(x_2)}{2}h + \dots$
+\end{center}
+
+This simplifies to the following.
+
+\begin{center}
+$\int_{a}^{b}f(x) = \frac{h}{2}(f(x_0)+f(x_N) + 2\sum_{i=1}^{N-1}f(x_i))$
+\end{center}
+
+It is easy to see using the Taylor expansion of $f(x)$ that the error in this method is $\mathcal{O}(N^{-2})$.
+
+\begin{center}
+\textcolor{red}{add a plot for this}
+\end{center}
+
+Similar rules can be derived by interpolating the function using higher order polynomials. For example, interpolating by a quadratic yields Simpson's rule. (note: N should be even)
+
+\begin{center}
+$\int_{a}^{b}f(x) = \frac{h}{3}(f(x_0)+f(x_N) + 4\sum_{i=1}^{\frac{N}{2}}f(x_{2i-1}) + 2\sum_{i=1}^{\frac{N - 1}{2}}f(x_{2i}))$
+\end{center}
+
+\subsection{Romberg Integration}
+
+\subsection{Quadrature}
+
+\newpage
+\section{Discrete Fourier Transform}
+
+\newpage
+\section{Derivatives}
+Now that we are able to represent functions, we want to differentiate them. This is a problem if we are representing a function as an array of sample points as the standard definition of a derivative requires taking a limit. Instead, we can decide on an interpolation scheme, and then take the derivative of the interpolant to be the derivative of our function. We can then evaluate this derivative at the same sample points to create a new array which represents the derivative.
+
+\subsection{Finite Difference Schemes}
+Consider as an example, interpolating by piecewise linear functions. Between each point $x_i$ and it's adjacent point $x_{i+1}$, we have
+
+\begin{center}
+$f(x) = f(x_i) + \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}x$
+\end{center}
+
+We can then set the derivative to
+
+\begin{center}
+$f'(x_i) = \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}$
+\end{center}
+
+This can be expressed compactly as
+
+\begin{center}
+$\frac{d\overrightarrow{f}}{dx} = \boldsymbol{D} \overrightarrow{f}$
+\end{center}
+
+With $\boldsymbol{D}$ given by
+
+\begin{center}
+$
+\boldsymbol{D}
+=
+\begin{bmatrix}
+	\frac{1}{x_0 - x_1} & -\frac{1}{x_0 - x_1} & \dots & \dots & \dots \\ 
+	0 & \frac{1}{x_1 - x_2} & -\frac{1}{x_1 - x_2} & \dots & \dots \\
+	\vdots & 0 & \frac{1}{x_2 - x_3} & -\frac{1}{x_2 - x_3} & \dots \\
+	\vdots & \vdots & \ddots & \ddots & \ddots
+\end{bmatrix}
+$
+\end{center}
+
+The accuracy of a method such as this depends on the choice of $x_i$'s and the particular interpolation technique. The above is an example of a finite difference scheme. In the case of equal spacing, $\boldsymbol{D}$ takes on a simple form.
+
+\begin{center}
+$
+\boldsymbol{D}
+= \frac{1}{h}
+\begin{bmatrix}
+	1 & -1 & \dots & \dots & \dots \\ 
+	0 & 1 & -1 & \dots & \dots \\
+	\vdots & 0 & 1 & -1 & \dots \\
+	\vdots & \vdots & \ddots & \ddots & \ddots
+\end{bmatrix}
+$
+\end{center}
+
+\subsection{Spectral Derivatives}
+\begin{center}
+\textcolor{red}{Add stuff about stuff.}
+\end{center}
+
+\end{document}
