@@ -1,9 +1,16 @@
 \documentclass[12pt,letterpaper]{article}
+
 \usepackage{amssymb,amsmath,amsthm,indentfirst}
+%Amsmath command that numbers equation by section
+\numberwithin{equation}{section}
+
 \usepackage[margin=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{color}
+
+%Has all the bracket notation and vector stuff 
+\usepackage{physics}
 
 % general definitions
 \newcommand{\beq}{\begin{equation}}
@@ -22,8 +29,127 @@
 \tableofcontents
 
 \newpage
-\section{T-Matrix and Scattering}
-\section{Local vs. Non-Local potentials}
+\section{Potentials in QM}
+\subsection{Local vs Non-Local Potentials}
+Often, our first examples in quantum mechanics are systems with local potentials in position space. To be specific, we represent our wave function $\ket{\Psi}$ as a complex valued function of $\va{r}$ and $t$, $\Psi(\va{r},t)$, and our potential is a function of just the spacial coordinates, $V(\va{r})$. Then the Schrödinger equation becomes a separable partial differential equation for the unknown function $\Psi(\va{r},t)$. The Schrödinger equation becomes the following.
+\beq
+i\hbar\pdv{t} \Psi(\va{r},t) = -\frac{\hbar^2}{2m} \laplacian \Psi(\va{r},t) + V(x)\Psi(\va{r},t)
+\eeq
+In this case, the operator $\hat{V}$ applied to $\Psi(\va{r},t)$ just yields $V(\va{r})\Psi(\va{r})$. The result only depends on the wave function $\Psi(\va{r},t)$ at the point $\va{r}$. We call this a local potential, as it only depends on the wave function locally at the point $\va{r}$. 
+\newline \indent
+A more abstract way to define this is to say that a potential $\hat{V}$ is local with respect to a basis if it is diagonal in that basis, i.e. $\matrixel{x}{\hat{V}}{x'} = 0$ if $x\neq x'$. This need not always be the case. We could have a potential such that  $\hat{V}\Psi(\va{r},t) = \int V(\va{r},\va{r'})\Psi(\va{r'},t)d^3\va{r'}$. In this case, the Schrödinger equation becomes the following.
+\beq
+i\hbar\pdv{t} \Psi(\va{r},t) = -\frac{\hbar^2}{2m} \laplacian \Psi(\va{r},t) + \int V(\va{r},\va{r'})\Psi(\va{r'},t)d^3\va{r'}
+\eeq
+This is now an integro-differential equation, which is more complicated to solve. One method of solving this is to discretize the system and solve it numerically. This is practical in one spacial dimension or when the potential only depends on the magnitude of the spacial coordinate. When this is true, it can be recast as a matrix equation. Unfortunately, the matrix will be dense, making these methods slow.
+\subsection{A Numerical Example of a Non-Local Potential}
+Find bound states of a non-local nuclear potential. Include SO-coupling and coulomb repulsion. Use wood-saxon potentials like in Bertulani chapter 10 and the paper by Cho et al. 
+
+\newpage
+\section{Scattering}
+Brief intro
+
+\subsection{Scattering Amplitude}
+Define scattering amplitude
+
+\subsection{Partial Waves}
+Explain partial waves and phase shifts. Show how to reconstruct scattering amplitude from phase shifts.
+
+\subsection{Scattering Matrices}
+Define S, T and R/K matrices. Show how to solve for them and get phase shifts.
+
+\newpage
+\section{Nuclear Reactions}
+Basics about nuclear reactions
+
+\subsection{Nuclear Optical Potential}
+Suppose we have a single nucleon scattering off of a nucleus with N nucleons. We can describe this by a Hamiltonian $\boldsymbol{H}$.
+
+\begin{center}
+$\boldsymbol{H} = \boldsymbol{T_0} + \boldsymbol{V}(r_0, r_1, \dots, r_N) + \boldsymbol{H_{nuc}}(r_1, r_2, \dots, r_N)$
+\end{center}
+
+$\boldsymbol{T_0}$ is the kinetic operator for the projectile, $\boldsymbol{H_{nuc}}$ is the Hamiltonian which describes the bound particles in the nucleus, and $\boldsymbol{V}$ is the potential between the projectile and all of the particles in the nucleus. Let $\{\phi_i\}_{i=1}^N$ be the eigenstates of $\boldsymbol{H_{nuc}}$ with energies $\{\epsilon_i\}$. We want to solve for the eigenstates of the full Hamiltonian, so let's expand the eigenfunction $\Psi_E$ in the complete basis $\{\phi_i\}$.
+
+\begin{center}
+$\Psi_E(r_0,r_1,\dots) = \sum_{j=0}^{N} u_j(r_0)\phi_j(r_1,r_2,\dots)$
+\end{center}
+
+\noindent Let's substitute this expansion into the Schrödinger equation, $\boldsymbol{H} \Psi_E = E \Psi_E$. 
+
+\begin{center}
+$\sum_{j=0}^{N} \boldsymbol{T_0}u_j\phi_j + \boldsymbol{V}u_j\phi_j + \boldsymbol{H_{nuc}}u_j\phi_j = E \sum_{j=0}^{N} u_j\phi_j$
+\end{center}
+
+\noindent Now, we use the fact that $\boldsymbol{H_{nuc}}u_j\phi_j = u_j\boldsymbol{H_{nuc}}\phi_j = \epsilon_j u_j\phi_j$
+
+\begin{center}
+$\sum_{j=0}^{N} (\boldsymbol{T_0} + \boldsymbol{V} + \epsilon_j) u_j\phi_j = E \sum_{j=0}^{N} u_j\phi_j$
+\end{center}
+
+\noindent Since the $\phi_j$'s are orthogonal, we can multiply both sides by $\phi_i$ on both sides and integrate over the variables $(r_1,r_2,\dots)$ to obtain the following.
+\newline
+Note: $\matrixel{\phi_i}{\boldsymbol{V}u_j}{\phi_j} = \matrixel{\phi_i}{\boldsymbol{V}}{\phi_j}u_j = V_{ij}u_j$ 
+
+\begin{center}
+$\sum_{j=0}^{N}(\boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}) u_i = E \sum_{j=0}^{N}u_j\delta_{ij}$
+\end{center}
+\begin{center}
+$(\boldsymbol{T_0} + \epsilon_i) u_i +  \sum_{j=0}^{N}V_{ij}u_j = E u_i$
+\end{center}
+
+\noindent For simplification, we introduce the following notation.
+
+\begin{center}
+$\boldsymbol{\Phi} =
+\begin{pmatrix}
+u_1 \\ u_2 \\ \vdots
+\end{pmatrix}$
+\end{center}
+
+\begin{center}
+$\boldsymbol{V_0} =
+\begin{pmatrix}
+V_{01} & V_{02} & \dots
+\end{pmatrix}$
+\end{center}
+
+\begin{center}
+$H_{ij} = \boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}$
+\end{center}
+
+\noindent Looking at the  $i = 0$ case and $i \neq 0$ case, we have the following two equations.
+\newline
+Note: We can define $\epsilon_0 = 0$
+
+\beq
+(\boldsymbol{T_0} + V_{00} - E)u_0 = -\boldsymbol{V_0}\boldsymbol{\Phi}
+\eeq
+
+\beq
+(\boldsymbol{H} - E)\boldsymbol{\Phi} = -\boldsymbol{V_0^\dagger}u_0
+\eeq
+
+\noindent We can eliminate $\boldsymbol{\Phi}$ in this expression and get the following equation for $u_0$.
+
+\beq
+(\boldsymbol{T_0} + V_{00}(r_0) + \boldsymbol{V_0} \frac{1}{E - \boldsymbol{H}} \boldsymbol{V_0^\dagger})u_0(r_0) = Eu_0(r_0)
+\eeq
+
+We now have a single variable time-independent Schrödinger equation for the unknown $u_0(r_0)$, with a modified potential which we will call the optical potential, $V_{opt}$.
+
+\beq
+V_{opt}(r_0) = V_{00}(r_0) + \boldsymbol{V_0} \frac{1}{E - \boldsymbol{H}} \boldsymbol{V_0^\dagger}
+\eeq
+
+This is, in general, an energy dependent, complex and non-local potential when working with outgoing spherical wave boundary conditions. This is not a simple quantity to calculate for a given $\boldsymbol{V}$, and the non-locality of $V_{opt}$ makes it difficult to solve equation $(3.3)$. 
+
+\subsection{A Phenomenological Optical Potential}
+
+\subsection{A Numerical Example of Scattering With an Optical Potential}
+This should involve code and plots.
+
+\subsection{A Simple Model of a Two Level Nuclei}
 
 \newpage
 \appendix
@@ -37,9 +163,9 @@ First, we can sample the function at a sequence of points, and approximate it by
 $a_0 + a_1 x_i + a_2 x_i^2 + ... + a_N x_i^N = f(x_i)$
 \end{center}
 
-\indent We can convert this to a matrix equation $\boldsymbol{X}\overrightarrow{a} = \overrightarrow{f}$, where $a$ is the vector of coefficients, $f$ is the vector of function values such that $f_i = f(x_i)$, and $X_{ij} = x_i^j$ Now, we can find the coefficients easily by solving the matrix equation. The solution is given by 
+\indent We can convert this to a matrix equation $\boldsymbol{X}\va{a} = \va{f}$, where $\va{a}$ is the vector of coefficients, $\va{f}$ is the vector of function values such that $f_i = f(x_i)$, and $X_{ij} = x_i^j$ Now, we can find the coefficients easily by solving the matrix equation. The solution is given by 
 \begin{center}
-$\overrightarrow{a} = \boldsymbol{X}^{-1} \overrightarrow{f}$
+$\va{a} = \boldsymbol{X}^{-1} \va{f}$
 \end{center}
 With the coefficients, we can evaluate $f(x)$ at any $x \in [a,b]$ by
 \begin{center}
@@ -84,7 +210,7 @@ The simplest method for integration is to use piecewise linear interpolation, si
 $\int_{a}^{b}f(x) = \frac{f(x_0)+f(x_1)}{2}h + \frac{f(x_1)+f(x_2)}{2}h + \dots$
 \end{center}
 
-This simplifies to the following.
+\noindent This simplifies to the following.
 
 \begin{center}
 $\int_{a}^{b}f(x) = \frac{h}{2}(f(x_0)+f(x_N) + 2\sum_{i=1}^{N-1}f(x_i))$
@@ -102,12 +228,21 @@ Similar rules can be derived by interpolating the function using higher order po
 $\int_{a}^{b}f(x) = \frac{h}{3}(f(x_0)+f(x_N) + 4\sum_{i=1}^{\frac{N}{2}}f(x_{2i-1}) + 2\sum_{i=1}^{\frac{N - 1}{2}}f(x_{2i}))$
 \end{center}
 
+\newpage
 \subsection{Romberg Integration}
+\begin{center}
+\textcolor{red}{Add stuff about stuff.}
+\end{center}
 
+\newpage
 \subsection{Quadrature}
+\begin{center}
+\textcolor{red}{Add stuff about stuff.}
+\end{center}
 
 \newpage
 \section{Discrete Fourier Transform}
+Add stuff about stuff
 
 \newpage
 \section{Derivatives}
@@ -120,19 +255,19 @@ Consider as an example, interpolating by piecewise linear functions. Between eac
 $f(x) = f(x_i) + \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}x$
 \end{center}
 
-We can then set the derivative to
+\noindent We can then set the derivative to
 
 \begin{center}
 $f'(x_i) = \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}$
 \end{center}
 
-This can be expressed compactly as
+\noindent This can be expressed compactly as
 
 \begin{center}
-$\frac{d\overrightarrow{f}}{dx} = \boldsymbol{D} \overrightarrow{f}$
+$\dv{\va{f}}{x} = \boldsymbol{D} \va{f}$
 \end{center}
 
-With $\boldsymbol{D}$ given by
+\noindent With $\boldsymbol{D}$ given by
 
 \begin{center}
 $
