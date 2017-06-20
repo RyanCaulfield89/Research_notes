@@ -43,24 +43,22 @@ i\hbar\pdv{t} \Psi(\va{r},t) = -\frac{\hbar^2}{2m} \laplacian \Psi(\va{r},t) + \
 \eeq
 This is now an integro-differential equation, which is more complicated to solve. One method of solving this is to discretize the system and solve it numerically. This is practical in one spacial dimension or when the potential only depends on the magnitude of the spacial coordinate. When this is true, it can be recast as a matrix equation. Unfortunately, the matrix will be dense, making these methods slow.
 \subsection{A Numerical Example of a Non-Local Potential}
-Find bound states of a non-local nuclear potential. Include SO-coupling and coulomb repulsion. Use wood-saxon potentials like in Bertulani chapter 10 and the paper by Cho et al. 
+\textcolor{red}{Find bound states of a non-local nuclear potential. Include SO-coupling and coulomb repulsion. Use wood-saxon potentials like in Bertulani chapter 10 and the paper by Cho et al.} 
 
-\newpage
 \section{Scattering}
-Brief intro
+\textcolor{red}{Brief intro}
 
 \subsection{Scattering Amplitude}
-Define scattering amplitude
+\textcolor{red}{Define scattering amplitude}
 
 \subsection{Partial Waves}
-Explain partial waves and phase shifts. Show how to reconstruct scattering amplitude from phase shifts.
+\textcolor{red}{Explain partial waves and phase shifts. Show how to reconstruct scattering amplitude from phase shifts.}
 
 \subsection{Scattering Matrices}
-Define S, T and R/K matrices. Show how to solve for them and get phase shifts.
+\textcolor{red}{Define S, T and R/K matrices. Show how to solve for them and get phase shifts.}
 
-\newpage
 \section{Nuclear Reactions}
-Basics about nuclear reactions
+\textcolor{red}{Basics about nuclear reactions}
 
 \subsection{Nuclear Optical Potential}
 Suppose we have a single nucleon scattering off of a nucleus with N nucleons. We can describe this by a Hamiltonian $\boldsymbol{H}$.
@@ -119,11 +117,9 @@ $H_{ij} = \boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}$
 \end{center}
 
 \noindent Looking at the  $i = 0$ case and $i \neq 0$ case, we have the following two equations.
-\newline
-Note: We can define $\epsilon_0 = 0$
 
 \beq
-(\boldsymbol{T_0} + V_{00} - E)u_0 = -\boldsymbol{V_0}\boldsymbol{\Phi}
+(\boldsymbol{T_0} + V_{00} + \epsilon_0 - E)u_0 = -\boldsymbol{V_0}\boldsymbol{\Phi}
 \eeq
 
 \beq
@@ -133,23 +129,147 @@ Note: We can define $\epsilon_0 = 0$
 \noindent We can eliminate $\boldsymbol{\Phi}$ in this expression and get the following equation for $u_0$.
 
 \beq
-(\boldsymbol{T_0} + V_{00}(r_0) + \boldsymbol{V_0} \frac{1}{E - \boldsymbol{H}} \boldsymbol{V_0^\dagger})u_0(r_0) = Eu_0(r_0)
+(\boldsymbol{T_0} + V_{00}(r_0) + \boldsymbol{V_0} \frac{1}{E + i\eta - \boldsymbol{H}} \boldsymbol{V_0^\dagger})u_0(r_0) = (E - \epsilon_0)u_0(r_0)
 \eeq
 
 We now have a single variable time-independent Schrödinger equation for the unknown $u_0(r_0)$, with a modified potential which we will call the optical potential, $V_{opt}$.
 
 \beq
-V_{opt}(r_0) = V_{00}(r_0) + \boldsymbol{V_0} \frac{1}{E - \boldsymbol{H}} \boldsymbol{V_0^\dagger}
+V_{opt}(r_0) = V_{00}(r_0) + \boldsymbol{V_0} \frac{1}{E + i\eta - \boldsymbol{H}} \boldsymbol{V_0^\dagger}
 \eeq
 
 This is, in general, an energy dependent, complex and non-local potential when working with outgoing spherical wave boundary conditions. This is not a simple quantity to calculate for a given $\boldsymbol{V}$, and the non-locality of $V_{opt}$ makes it difficult to solve equation $(3.3)$. 
 
 \subsection{A Phenomenological Optical Potential}
+\textcolor{red}{This should give an explanation like whats in bertulani.}
 
 \subsection{A Numerical Example of Scattering With an Optical Potential}
-This should involve code and plots.
+\textcolor{red}{This should involve code and plots.}
 
 \subsection{A Simple Model of a Two Level Nuclei}
+Here we will explore a simple system in which we can find $\boldsymbol{V_{opt}}$ and $\{u_i\}$ exactly. Suppose our nucleus was just a simple two level system. We can describe $\boldsymbol{H_{nuc}}$ and $\{\phi_i\}$ as follows.
+
+\begin{center}
+$\boldsymbol{H_{nuc}} = 
+\begin{pmatrix}
+\epsilon_0 & 0 \\ 
+0 & \epsilon_1
+\end{pmatrix}$
+\end{center}
+
+\begin{center}
+$\phi_0 = 
+\begin{pmatrix}
+1 \\ 0
+\end{pmatrix}$
+\end{center}
+
+\begin{center}
+$\phi_1 = 
+\begin{pmatrix}
+0 \\ 1
+\end{pmatrix}$
+\end{center}
+
+\noindent We will work in the basis of ${\phi_0,\phi_1}$ and the momentum basis for the scatterer $p$. Let's imagine the simplest potential we can which couples the two states $\phi_0$ and $\phi_1$.
+
+\begin{center}
+$\boldsymbol{V} =
+\begin{pmatrix}
+0 & V_{0} \\ 
+V_{0}^* & 0
+\end{pmatrix}
+$
+\end{center}
+
+\textcolor{red}{From scratch}
+
+\noindent Let's expand $\Psi_E$ in the basis $\{\phi_i\}$.
+
+\begin{center}
+$\Psi_E(p) = u_0(p)\begin{pmatrix}
+1 \\ 0
+\end{pmatrix}
++ u_1(p)\begin{pmatrix}
+0 \\ 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+u_0(p) \\ u_1(p)
+\end{pmatrix}$
+\end{center}
+
+\noindent Substituting this expansion into the Schrödinger equation, we get the following.
+
+\begin{center}
+$\boldsymbol{T_0}
+\begin{pmatrix}
+u_0(p) \\ u_1(p)
+\end{pmatrix}
++
+\begin{pmatrix}
+0 & V_{0} \\ 
+V_{0}^* & 0
+\end{pmatrix}
+\begin{pmatrix}
+u_0(p) \\ u_1(p)
+\end{pmatrix}
++
+\begin{pmatrix}
+\epsilon_0 & 0 \\ 
+0 & \epsilon_1
+\end{pmatrix}
+\begin{pmatrix}
+u_0(p) \\ u_1(p)
+\end{pmatrix}
+=
+E
+\begin{pmatrix}
+u_0(p) \\ u_1(p)
+\end{pmatrix}$
+\end{center}
+
+\begin{center}
+$\begin{pmatrix}
+\boldsymbol{T_0}u_0(p)+V_{0}u_1(p)+\epsilon_0u_0(p)=Eu_0(p) \\ 
+\boldsymbol{T_0}u_1(p)+V_{0}^*u_0(p)+\epsilon_1u_1(p)=Eu_1(p)
+\end{pmatrix}$
+\end{center}
+
+\noindent Solving the second equation for $u_1$ and substituting into the second equation we get the following.
+
+\begin{center}
+$(\boldsymbol{T_0}+V_{0}\frac{1}{E + i\eta -\epsilon_1-\boldsymbol{T_0}}V_{0}^*+\epsilon_0)u_0(p)=Eu_0(p)$
+\end{center}
+
+\begin{center}
+$(p^2+\frac{\abs{V_{0}}^2}{E + i\eta -\epsilon_1-p^2} )u_0(p)=(E - \epsilon_0)u_0(p)$
+\end{center}
+
+\begin{center}
+$V_{opt}(p) = \frac{\abs{V_{0}}^2}{E + i\eta - \epsilon_1 - p^2}$
+\end{center}
+
+\textcolor{red}{Just evaluate 3.4}
+
+\noindent In the notation of equation $3.4$ we have the following.
+\begin{center}
+$\boldsymbol{V_0} = \matrixel{0}{\boldsymbol{V}}{1} = V_{0}$
+\end{center}
+\begin{center}
+$\boldsymbol{V_0}^\dagger = \matrixel{0}{\boldsymbol{V}}{1}^* = V_{0}^*$
+\end{center}
+\begin{center}
+$\boldsymbol{H} = H_{11} = \boldsymbol{T_0} + \boldsymbol{V_{11}} + \epsilon_1 = p^2 + \epsilon_1$
+\end{center}
+\begin{center}
+$V_{00} = \matrixel{0}{\boldsymbol{V}}{0} = 0$
+\end{center}
+
+\noindent We can evaluate equation $3.4$.
+\begin{center}
+$V_{opt}(p) = \frac{\abs{V_{0}}^2}{E + i\eta - \epsilon_1 - p^2}$
+\end{center}
 
 \newpage
 \appendix
@@ -193,7 +313,6 @@ $\rho(x) = \frac{N}{\pi \sqrt{1 - x^2}}$
 \textcolor{red}{Add stuff about stuff.}
 \end{center}
 
-\newpage
 \section{Integration}
 We now want to calculate definite integrals of functions represented numerically. One way of doing this, is to decide on an interpolation scheme, and integrate the interpolant exactly. This can often be done easily when using a polynomial interpolant. What we would like is a rule as follows.
 
@@ -228,23 +347,19 @@ Similar rules can be derived by interpolating the function using higher order po
 $\int_{a}^{b}f(x) = \frac{h}{3}(f(x_0)+f(x_N) + 4\sum_{i=1}^{\frac{N}{2}}f(x_{2i-1}) + 2\sum_{i=1}^{\frac{N - 1}{2}}f(x_{2i}))$
 \end{center}
 
-\newpage
 \subsection{Romberg Integration}
 \begin{center}
 \textcolor{red}{Add stuff about stuff.}
 \end{center}
 
-\newpage
 \subsection{Quadrature}
 \begin{center}
 \textcolor{red}{Add stuff about stuff.}
 \end{center}
 
-\newpage
 \section{Discrete Fourier Transform}
-Add stuff about stuff
+\textcolor{red}{Add stuff about stuff}
 
-\newpage
 \section{Derivatives}
 Now that we are able to represent functions, we want to differentiate them. This is a problem if we are representing a function as an array of sample points as the standard definition of a derivative requires taking a limit. Instead, we can decide on an interpolation scheme, and then take the derivative of the interpolant to be the derivative of our function. We can then evaluate this derivative at the same sample points to create a new array which represents the derivative.
 
