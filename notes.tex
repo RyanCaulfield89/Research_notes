@@ -63,58 +63,58 @@ This is now an integro-differential equation, which is more complicated to solve
 \subsection{Nuclear Optical Potential}
 Suppose we have a single nucleon scattering off of a nucleus with N nucleons. We can describe this by a Hamiltonian $\boldsymbol{H}$.
 
-\begin{center}
-$\boldsymbol{H} = \boldsymbol{T_0} + \boldsymbol{V}(r_0, r_1, \dots, r_N) + \boldsymbol{H_{nuc}}(r_1, r_2, \dots, r_N)$
-\end{center}
+\beq
+\boldsymbol{H} = \boldsymbol{T_0} + \boldsymbol{V}(r_0, r_1, \dots, r_N) + \boldsymbol{H_{nuc}}(r_1, r_2, \dots, r_N)
+\eeq
 
 $\boldsymbol{T_0}$ is the kinetic operator for the projectile, $\boldsymbol{H_{nuc}}$ is the Hamiltonian which describes the bound particles in the nucleus, and $\boldsymbol{V}$ is the potential between the projectile and all of the particles in the nucleus. Let $\{\phi_i\}_{i=1}^N$ be the eigenstates of $\boldsymbol{H_{nuc}}$ with energies $\{\epsilon_i\}$. We want to solve for the eigenstates of the full Hamiltonian, so let's expand the eigenfunction $\Psi_E$ in the complete basis $\{\phi_i\}$.
 
-\begin{center}
-$\Psi_E(r_0,r_1,\dots) = \sum_{j=0}^{N} u_j(r_0)\phi_j(r_1,r_2,\dots)$
-\end{center}
+\beq
+\Psi_E(r_0,r_1,\dots) = \sum_{j=0}^{N} u_j(r_0)\phi_j(r_1,r_2,\dots)
+\eeq
 
 \noindent Let's substitute this expansion into the Schrödinger equation, $\boldsymbol{H} \Psi_E = E \Psi_E$. 
 
-\begin{center}
-$\sum_{j=0}^{N} \boldsymbol{T_0}u_j\phi_j + \boldsymbol{V}u_j\phi_j + \boldsymbol{H_{nuc}}u_j\phi_j = E \sum_{j=0}^{N} u_j\phi_j$
-\end{center}
+\beq
+\sum_{j=0}^{N} \boldsymbol{T_0}u_j\phi_j + \boldsymbol{V}u_j\phi_j + \boldsymbol{H_{nuc}}u_j\phi_j = E \sum_{j=0}^{N} u_j\phi_j
+\eeq
 
 \noindent Now, we use the fact that $\boldsymbol{H_{nuc}}u_j\phi_j = u_j\boldsymbol{H_{nuc}}\phi_j = \epsilon_j u_j\phi_j$
 
-\begin{center}
-$\sum_{j=0}^{N} (\boldsymbol{T_0} + \boldsymbol{V} + \epsilon_j) u_j\phi_j = E \sum_{j=0}^{N} u_j\phi_j$
-\end{center}
+\beq
+\sum_{j=0}^{N} (\boldsymbol{T_0} + \boldsymbol{V} + \epsilon_j) u_j\phi_j = E \sum_{j=0}^{N} u_j\phi_j
+\eeq
 
 \noindent Since the $\phi_j$'s are orthogonal, we can multiply both sides by $\phi_i$ on both sides and integrate over the variables $(r_1,r_2,\dots)$ to obtain the following.
 \newline
 Note: $\matrixel{\phi_i}{\boldsymbol{V}u_j}{\phi_j} = \matrixel{\phi_i}{\boldsymbol{V}}{\phi_j}u_j = V_{ij}u_j$ 
 
-\begin{center}
-$\sum_{j=0}^{N}(\boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}) u_i = E \sum_{j=0}^{N}u_j\delta_{ij}$
-\end{center}
-\begin{center}
-$(\boldsymbol{T_0} + \epsilon_i) u_i +  \sum_{j=0}^{N}V_{ij}u_j = E u_i$
-\end{center}
+\beq
+\sum_{j=0}^{N}(\boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}) u_i = E \sum_{j=0}^{N}u_j\delta_{ij}
+\eeq
+\beq
+(\boldsymbol{T_0} + \epsilon_i) u_i +  \sum_{j=0}^{N}V_{ij}u_j = E u_i
+\eeq
 
 \noindent For simplification, we introduce the following notation.
 
-\begin{center}
-$\boldsymbol{\Phi} =
+\beq
+\boldsymbol{\Phi} =
 \begin{pmatrix}
 u_1 \\ u_2 \\ \vdots
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
-\begin{center}
-$\boldsymbol{V_0} =
+\beq
+\boldsymbol{V_0} =
 \begin{pmatrix}
 V_{01} & V_{02} & \dots
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
-\begin{center}
-$H_{ij} = \boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}$
-\end{center}
+\beq
+H_{ij} = \boldsymbol{T_0}\delta_{ij} + V_{ij} + \epsilon_j\delta_{ij}
+\eeq
 
 \noindent Looking at the  $i = 0$ case and $i \neq 0$ case, we have the following two equations.
 
@@ -149,45 +149,44 @@ This is, in general, an energy dependent, complex and non-local potential when w
 \subsection{A Simple Model of a Two Level Nuclei}
 Here we will explore a simple system in which we can find $\boldsymbol{V_{opt}}$ and $\{u_i\}$ exactly. Suppose our nucleus was just a simple two level system. We can describe $\boldsymbol{H_{nuc}}$ and $\{\phi_i\}$ as follows.
 
-\begin{center}
-$\boldsymbol{H_{nuc}} = 
+\beq
+\boldsymbol{H_{nuc}} = 
 \begin{pmatrix}
 \epsilon_0 & 0 \\ 
 0 & \epsilon_1
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
-\begin{center}
-$\phi_0 = 
+\beq
+\phi_0 = 
 \begin{pmatrix}
 1 \\ 0
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
-\begin{center}
-$\phi_1 = 
+\beq
+\phi_1 = 
 \begin{pmatrix}
 0 \\ 1
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
 \noindent We will work in the basis of ${\phi_0,\phi_1}$ and the momentum basis for the scatterer $p$. Let's imagine the simplest potential we can which couples the two states $\phi_0$ and $\phi_1$.
 
-\begin{center}
-$\boldsymbol{V} =
+\beq
+\boldsymbol{V} =
 \begin{pmatrix}
-0 & V_{0} \\ 
-V_{0}^* & 0
+0 & V_0 \\ 
+V_0^* & 0
 \end{pmatrix}
-$
-\end{center}
+\eeq
 
 \textcolor{red}{From scratch}
 
 \noindent Let's expand $\Psi_E$ in the basis $\{\phi_i\}$.
 
-\begin{center}
-$\Psi_E(p) = u_0(p)\begin{pmatrix}
+\beq
+\Psi_E(p) = u_0(p)\begin{pmatrix}
 1 \\ 0
 \end{pmatrix}
 + u_1(p)\begin{pmatrix}
@@ -196,20 +195,20 @@ $\Psi_E(p) = u_0(p)\begin{pmatrix}
 =
 \begin{pmatrix}
 u_0(p) \\ u_1(p)
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
 \noindent Substituting this expansion into the Schrödinger equation, we get the following.
 
-\begin{center}
-$\boldsymbol{T_0}
+\beq
+\boldsymbol{T_0}
 \begin{pmatrix}
 u_0(p) \\ u_1(p)
 \end{pmatrix}
 +
 \begin{pmatrix}
-0 & V_{0} \\ 
-V_{0}^* & 0
+0 & V_0 \\ 
+V_0^* & 0
 \end{pmatrix}
 \begin{pmatrix}
 u_0(p) \\ u_1(p)
@@ -226,50 +225,181 @@ u_0(p) \\ u_1(p)
 E
 \begin{pmatrix}
 u_0(p) \\ u_1(p)
-\end{pmatrix}$
-\end{center}
+\end{pmatrix}
+\eeq
 
-\begin{center}
-$\begin{pmatrix}
-\boldsymbol{T_0}u_0(p)+V_{0}u_1(p)+\epsilon_0u_0(p)=Eu_0(p) \\ 
-\boldsymbol{T_0}u_1(p)+V_{0}^*u_0(p)+\epsilon_1u_1(p)=Eu_1(p)
-\end{pmatrix}$
-\end{center}
+\beq
+\begin{pmatrix}
+\boldsymbol{T_0}u_0(p)+V_0u_1(p)+\epsilon_0u_0(p)=Eu_0(p) \\ 
+\boldsymbol{T_0}u_1(p)+V_0^*u_0(p)+\epsilon_1u_1(p)=Eu_1(p)
+\end{pmatrix}
+\eeq
 
 \noindent Solving the second equation for $u_1$ and substituting into the second equation we get the following.
 
-\begin{center}
-$(\boldsymbol{T_0}+V_{0}\frac{1}{E + i\eta -\epsilon_1-\boldsymbol{T_0}}V_{0}^*+\epsilon_0)u_0(p)=Eu_0(p)$
-\end{center}
+\beq
+(\boldsymbol{T_0}+V_{0}\frac{1}{E + i\eta -\epsilon_1-\boldsymbol{T_0}}V_0^*+\epsilon_0)u_0(p)=Eu_0(p)
+\eeq
 
-\begin{center}
-$(p^2+\frac{\abs{V_{0}}^2}{E + i\eta -\epsilon_1-p^2} )u_0(p)=(E - \epsilon_0)u_0(p)$
-\end{center}
+\beq
+(p^2+\frac{\abs{V_0}^2}{E + i\eta -\epsilon_1-p^2} )u_0(p)=(E - \epsilon_0)u_0(p)
+\eeq
 
-\begin{center}
-$V_{opt}(p) = \frac{\abs{V_{0}}^2}{E + i\eta - \epsilon_1 - p^2}$
-\end{center}
+\beq
+V_{opt}(p) = \frac{\abs{V_0}^2}{E + i\eta - \epsilon_1 - p^2}
+\eeq
 
-\textcolor{red}{Just evaluate 3.4}
+\textcolor{red}{Just evaluate 3.13}
 
-\noindent In the notation of equation $3.4$ we have the following.
-\begin{center}
-$\boldsymbol{V_0} = \matrixel{0}{\boldsymbol{V}}{1} = V_{0}$
-\end{center}
-\begin{center}
-$\boldsymbol{V_0}^\dagger = \matrixel{0}{\boldsymbol{V}}{1}^* = V_{0}^*$
-\end{center}
-\begin{center}
-$\boldsymbol{H} = H_{11} = \boldsymbol{T_0} + \boldsymbol{V_{11}} + \epsilon_1 = p^2 + \epsilon_1$
-\end{center}
-\begin{center}
-$V_{00} = \matrixel{0}{\boldsymbol{V}}{0} = 0$
-\end{center}
+\noindent In the notation of equation $3.13$ we have the following.
+\beq
+\boldsymbol{V_0} = \matrixel{0}{\boldsymbol{V}}{1} = V_0
+\eeq
+\beq
+\boldsymbol{V_0}^\dagger = \matrixel{0}{\boldsymbol{V}}{1}^* = V_0^*
+\eeq
+\beq
+\boldsymbol{H} = H_{11} = \boldsymbol{T_0} + \boldsymbol{V_{11}} + \epsilon_1 = p^2 + \epsilon_1
+\eeq
+\beq
+V_{00} = \matrixel{0}{\boldsymbol{V}}{0} = 0
+\eeq
 
-\noindent We can evaluate equation $3.4$.
-\begin{center}
-$V_{opt}(p) = \frac{\abs{V_{0}}^2}{E + i\eta - \epsilon_1 - p^2}$
-\end{center}
+\noindent We can evaluate equation $3.13$.
+\beq
+V_{opt}(p) = \frac{\abs{V_0}^2}{E + i\eta - \epsilon_1 - p^2}
+\eeq
+
+\noindent Now, let's consider a similar potential in the position basis of the scatterer.
+
+\beq
+\boldsymbol{V} =
+- \delta(x)
+\begin{pmatrix}
+V_0 & V_1\\ 
+V_1 & V_0
+\end{pmatrix}
+\eeq
+
+\noindent Again, in the notation of equation $3.13$ we have the following.
+\beq
+\boldsymbol{V_0} = \matrixel{0}{\boldsymbol{V}}{1} = - V_1\delta(x)
+\eeq
+\beq
+\boldsymbol{V_0}^\dagger = \matrixel{0}{\boldsymbol{V}}{1}^* = - V_1\delta(x)
+\eeq
+\beq
+\boldsymbol{H} = H_{11} = \boldsymbol{T_0} + \boldsymbol{V_{11}} + \epsilon_1 = p^2 + \epsilon_1 - V_0\delta(x)
+\eeq
+\beq
+V_{00} = \matrixel{0}{\boldsymbol{V}}{0} = - V_0\delta(x)
+\eeq
+
+\noindent We can evaluate equation $3.13$.
+\beq
+V_{opt}(x) = - V_0\delta(x) + V_1\delta(x) \frac{1}{E + i\eta - \epsilon_1 - p^2 + V_0\delta(x)} V_1\delta(x)
+\eeq
+
+\noindent We can identify part of the second term as a Green's function.
+
+\beq
+G(x) = \frac{1}{E + i\eta - \epsilon_1 - p^2 + V_0\delta(x)} V_1\delta(x)
+\eeq
+
+\beq
+V_{opt}(x) = - V_0\delta(x) + V_1\delta(x)G(x)
+\eeq
+
+\noindent Now, we need to solve the following equation for $G(x)$.
+
+\beq
+(E - \epsilon_1 - p^2 + V_0\delta(x))G(x) = V_1 \delta(x)
+\eeq
+
+\noindent For $x\neq0$, the equation and it's solution are simple.
+
+\beq
+(E - \epsilon_1 - p^2)G(x) = 0
+\eeq
+
+\noindent The solutions are plane waves. We will apply choose a solution which has incoming and outgoing waves on the left, but only outgoing waves on the right. We can define $k = \sqrt{E - \epsilon_1}$.
+
+\beq
+G(x) = 
+\begin{cases}
+\exp(ikx) + R\exp(-ikx) & x\leq 0 \\
+T\exp(ikx) & x\geq 0
+\end{cases}
+\eeq
+
+\noindent Continuity at the origin give the following equation.
+
+\beq
+T = 1 + R
+\eeq
+
+\noindent The derivative will not be continuous, but we can find an equation for the change in the derivative by integrating equation 3.37 in the neighborhood $(-\epsilon,\epsilon)$ in the limit $\epsilon \rightarrow 0$.
+
+\beq
+(E - \epsilon_1) \int_{-\epsilon}^{\epsilon}G(x)\dd{x} - \int_{-\epsilon}^{\epsilon}\dv[2]{G}{x}\dd{x} + V_0\int_{-\epsilon}^{\epsilon}\delta(x)G(x)\dd{x} = V_1\int_{-\epsilon}^{\epsilon}\delta(x)\dd{x}
+\eeq
+
+\beq
+\eval{\dv{G}{x}}_{-\epsilon}^\epsilon = V_0G(0) - V_1
+\eeq 
+
+\beq
+ik(1-R) - ikT = V_0T - V_1
+\eeq
+
+\noindent Combining equations (3.43) and (3.40) we get expressions for $R$ and $T$ in terms of known variables.
+
+\beq
+T = \frac{V_1}{V_0 + 2ik}
+\eeq
+
+\beq
+R = \frac{V_1}{V_0 + 2ik} - 1
+\eeq 
+
+\noindent Now, we can return to the Schrödinger equation in order to find the phase shift $\delta_0$.
+
+\beq
+\dv[2]{\Psi}{x} + \delta(x)(V_1G(x) - V_0)\Psi(x) = (E - \epsilon_0) \Psi(x) 
+\eeq
+
+\noindent For $x\neq0$, the equation becomes simple. Letting $\kappa^2 = E - \epsilon_0$, we get the following.
+
+\beq
+\dv[2]{\Psi}{x} + \kappa^2 \Psi(x) = 0
+\eeq
+
+\beq
+\Psi(x) = 
+\begin{cases}
+\alpha_1\cos(\kappa x - \delta_0) & x \leq 0 \\
+\alpha_2\cos(\kappa x + \delta_0) & x \geq 0
+\end{cases}
+\eeq
+
+\noindent Here, we have chosen the positive parity eigenstate in order to determine the phase shift $\delta_0$. Continuity implies that $\alpha_1 = \alpha_2$. As before, the derivative will be discontinuous, and we can use the same trick to get the following equation.
+
+\beq
+\eval{\dv{\Psi}{x}}_{-\epsilon}^\epsilon + (V_1T - V_0)\Psi(0) = 0
+\eeq
+
+\beq
+2\kappa \alpha \sin(\delta_0) + (V_1T - V_0)\alpha \cos(\delta_0)
+\eeq
+
+\beq
+\tan(\delta_0) = \frac{V_0 - V_1T}{2\kappa}
+\eeq
+
+\beq
+\tan(\delta_0) = \frac{V_0}{2\kappa} - \frac{V_1^2}{2\kappa(V_0 + 2ik)}
+\eeq
+
 
 \newpage
 \appendix
@@ -279,18 +409,18 @@ To be able to do Calculus, we must be able to represent a function numerically. 
 
 \subsection{Global Interpolation by Polynomials}
 First, we can sample the function at a sequence of points, and approximate it by the unique polynomial which agrees with the function at each points. Let's consider a function $f(x) : [a,b] \rightarrow \reals$ Let $x_i$ be a sequence of points in $[a,b]$ such that $x_0 = a$ and $x_N = b$. Now, we can approximate $f(x)$ by the unique polynomial which agrees with $f(x)$ at each point $x_i$. To find such a polynomial, we need to find coefficients $a_j$ such that for each $i$,
-\begin{center}
-$a_0 + a_1 x_i + a_2 x_i^2 + ... + a_N x_i^N = f(x_i)$
-\end{center}
+\beq
+a_0 + a_1 x_i + a_2 x_i^2 + ... + a_N x_i^N = f(x_i)
+\eeq
 
 \indent We can convert this to a matrix equation $\boldsymbol{X}\va{a} = \va{f}$, where $\va{a}$ is the vector of coefficients, $\va{f}$ is the vector of function values such that $f_i = f(x_i)$, and $X_{ij} = x_i^j$ Now, we can find the coefficients easily by solving the matrix equation. The solution is given by 
-\begin{center}
-$\va{a} = \boldsymbol{X}^{-1} \va{f}$
-\end{center}
+\beq
+\va{a} = \boldsymbol{X}^{-1} \va{f}
+\eeq
 With the coefficients, we can evaluate $f(x)$ at any $x \in [a,b]$ by
-\begin{center}
-$f(x) = \sum_{i=0}^{N} a_i x^i$ 
-\end{center}
+\beq
+f(x) = \sum_{i=0}^{N} a_i x^i
+\eeq
 
 \indent As constructed, this method of interpolation should approximate an Nth degree polynomial exactly. But, how accurately does it approximate non-polynomial functions? The Stone-Weierstrass theorem tells us that every continuous function can be uniformly approximated as a polynomial. One would assume that as the number of sample points increases, the method should converge uniformly to the function. It turns out that this is not true in general. In particular, choosing $x_i$ to be evenly spaced and a function whose Taylor series has a finite radius of convergence this method fails spectacularly.
 \begin{center}
@@ -298,9 +428,9 @@ $f(x) = \sum_{i=0}^{N} a_i x^i$
 \end{center}
 
 \indent We can mitigate this problem by using points which have an asymptotic distribution in $[0,1]$ given by
-\begin{center}
-$\rho(x) = \frac{N}{\pi \sqrt{1 - x^2}}$
-\end{center}
+\beq
+\rho(x) = \frac{N}{\pi \sqrt{1 - x^2}}
+\eeq
 
 \indent Often, we satisfy this condition using roots or extrema of certain sets of orthogonal polynomials such as Legendre or Chebyshev polynomials. These special polynomials turn out to be very useful for quadrature and derivatives, and they will be explained further in later sections.
 
@@ -316,24 +446,24 @@ $\rho(x) = \frac{N}{\pi \sqrt{1 - x^2}}$
 \section{Integration}
 We now want to calculate definite integrals of functions represented numerically. One way of doing this, is to decide on an interpolation scheme, and integrate the interpolant exactly. This can often be done easily when using a polynomial interpolant. What we would like is a rule as follows.
 
-\begin{center}
-$\int_{a}^{b}f(x) = \sum_{i=0}^{N-1}f(x_i)w_i$
-\end{center}
+\beq
+\int_{a}^{b}f(x) = \sum_{i=0}^{N-1}f(x_i)w_i
+\eeq
 
 The challenge is finding the right values of $w_i$.
 
 \subsection{Newton-Cotes Formula}
 The simplest method for integration is to use piecewise linear interpolation, since each region $[x_i,x_{i+1}]$ can be integrated exactly using the geometric formula for a trapezoid. The method is appropriately named the trapezoid rule.
 
-\begin{center}
-$\int_{a}^{b}f(x) = \frac{f(x_0)+f(x_1)}{2}h + \frac{f(x_1)+f(x_2)}{2}h + \dots$
-\end{center}
+\beq
+\int_{a}^{b}f(x) = \frac{f(x_0)+f(x_1)}{2}h + \frac{f(x_1)+f(x_2)}{2}h + \dots
+\eeq
 
 \noindent This simplifies to the following.
 
-\begin{center}
-$\int_{a}^{b}f(x) = \frac{h}{2}(f(x_0)+f(x_N) + 2\sum_{i=1}^{N-1}f(x_i))$
-\end{center}
+\beq
+\int_{a}^{b}f(x) = \frac{h}{2}(f(x_0)+f(x_N) + 2\sum_{i=1}^{N-1}f(x_i))
+\eeq
 
 It is easy to see using the Taylor expansion of $f(x)$ that the error in this method is $\mathcal{O}(N^{-2})$.
 
@@ -343,9 +473,9 @@ It is easy to see using the Taylor expansion of $f(x)$ that the error in this me
 
 Similar rules can be derived by interpolating the function using higher order polynomials. For example, interpolating by a quadratic yields Simpson's rule. (note: N should be even)
 
-\begin{center}
-$\int_{a}^{b}f(x) = \frac{h}{3}(f(x_0)+f(x_N) + 4\sum_{i=1}^{\frac{N}{2}}f(x_{2i-1}) + 2\sum_{i=1}^{\frac{N - 1}{2}}f(x_{2i}))$
-\end{center}
+\beq
+\int_{a}^{b}f(x) = \frac{h}{3}(f(x_0)+f(x_N) + 4\sum_{i=1}^{\frac{N}{2}}f(x_{2i-1}) + 2\sum_{i=1}^{\frac{N - 1}{2}}f(x_{2i}))
+\eeq
 
 \subsection{Romberg Integration}
 \begin{center}
@@ -366,26 +496,25 @@ Now that we are able to represent functions, we want to differentiate them. This
 \subsection{Finite Difference Schemes}
 Consider as an example, interpolating by piecewise linear functions. Between each point $x_i$ and it's adjacent point $x_{i+1}$, we have
 
-\begin{center}
-$f(x) = f(x_i) + \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}x$
-\end{center}
+\beq
+f(x) = f(x_i) + \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}x
+\eeq
 
 \noindent We can then set the derivative to
 
-\begin{center}
-$f'(x_i) = \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}$
-\end{center}
+\beq
+f'(x_i) = \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i}
+\eeq
 
 \noindent This can be expressed compactly as
 
-\begin{center}
-$\dv{\va{f}}{x} = \boldsymbol{D} \va{f}$
-\end{center}
+\beq
+\dv{\va{f}}{x} = \boldsymbol{D} \va{f}
+\eeq
 
 \noindent With $\boldsymbol{D}$ given by
 
-\begin{center}
-$
+\beq
 \boldsymbol{D}
 =
 \begin{bmatrix}
@@ -394,13 +523,11 @@ $
 	\vdots & 0 & \frac{1}{x_2 - x_3} & -\frac{1}{x_2 - x_3} & \dots \\
 	\vdots & \vdots & \ddots & \ddots & \ddots
 \end{bmatrix}
-$
-\end{center}
+\eeq
 
 The accuracy of a method such as this depends on the choice of $x_i$'s and the particular interpolation technique. The above is an example of a finite difference scheme. In the case of equal spacing, $\boldsymbol{D}$ takes on a simple form.
 
-\begin{center}
-$
+\beq
 \boldsymbol{D}
 = \frac{1}{h}
 \begin{bmatrix}
@@ -409,8 +536,7 @@ $
 	\vdots & 0 & 1 & -1 & \dots \\
 	\vdots & \vdots & \ddots & \ddots & \ddots
 \end{bmatrix}
-$
-\end{center}
+\eeq
 
 \subsection{Spectral Derivatives}
 \begin{center}
